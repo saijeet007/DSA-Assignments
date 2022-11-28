@@ -1,0 +1,257 @@
+#include <iostream>
+using namespace std;
+struct node
+{
+int data;
+node*next;
+    node*prev;
+
+};
+class Doublelinkedlist
+{
+private:
+node *header=NULL;
+public:
+void InsertAtBeginning();
+void DisplayList();
+void InsetAtEnd();
+void DeleteFirst();
+void DeleteLast();
+void InsertAtPosition();
+void DeleteAtPosition();
+
+
+
+
+};
+void Doublelinkedlist::InsertAtBeginning() // @suppress("Member declaration not found")
+{
+node *newnode;
+newnode=new node();
+cout<<"\nEnter The Data Part Of THe Node\n"<<endl;
+int n;
+cin>>n;
+newnode->data=n; // @suppress("Field cannot be resolved")
+     newnode->next=header;
+     newnode->prev=NULL;
+      header=newnode;
+
+
+
+}
+
+void Doublelinkedlist::InsertAtEnd() // @suppress("Member declaration not found")
+{
+node *newnode;
+newnode = new node();
+int n;
+cout<<"Enter the data part of the node \n"<<endl;
+
+cin>>n;
+newnode->data=n; // @suppress("Field cannot be resolved")
+newnode->next=NULL; // @suppress("Field cannot be resolved")
+if(header==NULL)
+{
+header=newnode;
+newnode->prev=NULL;
+
+}
+else{
+node *temp;
+temp=header;
+while(temp->next!=NULL)
+{
+temp=temp->next;
+}
+temp->next=newnode;
+newnode->prev=temp;
+}
+}
+void Doublelinkedlist::DeleteFirst()
+{
+header=header->next;
+
+}
+void Doublelinkedlist::Deletelast()
+{
+if(header!=NULL)
+{
+node *temp;
+node *temp1;
+temp=header->next;
+temp1=header;
+while(temp->next!=NULL)
+{
+temp1=temp;
+temp=temp->next;
+}
+delete temp;
+temp1->next=NULL;
+
+
+}
+else
+cout<<"\nYou Haven't entered any element\n"<<endl;
+
+}
+void Doublelinkedlist::InsertAtPosition()
+{
+node *temp;
+int count=0;
+cout<<"\nEnter at which position you want to insert\n"<<endl;
+int n;
+cin>>n;
+temp=header;
+while(temp!=NULL)
+{
+temp=temp->next;
+count++;
+
+}
+
+if(n>count)
+{
+cout<<"\n You cannot add element "<<n<<"! as only "<<count<<"elements are in list\n"endl;
+
+}
+else if(n==1)
+{
+
+InsertAtBeginning();
+
+
+}
+else
+{
+node *newnode;
+node *prenode;
+newnode=new node();
+cout<<"\nEnter the data part of the node \n"<<endl;
+int p;
+cin>>p;
+newnode->data=p;
+node *temp=header;
+for(int i=0;i<n-2;i++)
+{
+temp =temp->next;
+
+}
+newnode->next=temp->next;
+            temp->next=newnode;
+
+
+}
+}
+void Doublelinkedlist::DeleteAtPosition()
+{
+node *temp;
+int count=0;
+temp=header;
+while(temp!=NULL)
+{
+temp=temp->next;
+count++;
+}
+int n;
+cout<<"\n Enter at which position you want to delete node\n"<<endl;
+cin>>n;
+if(n>count)
+{
+cout<<"You cannot delete element at"<<n<<"! as only "<<count<<"elements are in list\n"<<endl;
+}
+else
+{
+temp=header;
+for(int i=0;i<n-2;i++)
+{
+temp=temp->n;
+
+}
+temp->next=temp->next->next;
+
+
+}
+}
+void Doublelinkedlist::DisplayList()
+{
+node *temp;
+temp=header;
+while(temp!=NULL)
+{
+cout<<temp->data<<"\t";
+temp=temp->next;
+}
+
+}
+
+
+int main()
+{
+Doublelinkedlist s;
+int p=0;
+while(p!=-1)
+{
+cout<<"\nEnter 1 to insert node at beginning \n"<<endl;
+cout<<"\nEnter 2 to insert node at end \n"<<endl;
+cout<<"\nEnter 3 to delete node at beginning \n"<<endl;
+cout<<"\nEnter 4 to delete node at end \n"<<endl;
+cout<<"\nEnter 5 to insert node at position \n"<<endl;
+cout<<"\nEnter 6 to delete node at position \n"<<endl;
+cout<<"\nEnter 7 to display\n"<<endl;
+cout<<"Enter 8 to exit\n"<<endl;
+int n;
+cin>>n;Doublelinkedlist
+switch(n)
+{
+case 1:
+{
+s.InsetAtBeginning();
+
+}
+break;
+case 2:
+{
+s.InsertAtEnd();
+}
+break;
+case 3:
+{
+s.DeleteFirst();
+}
+break;
+case 4:
+{
+s.DeleteLast();
+
+}
+break ;
+case 5:
+{
+s.InsertAtPosition();
+}
+break;
+
+case 6:
+{
+s.DeleteAtPosition();
+}
+break;
+
+case 7:
+{
+s.DisplayList();
+
+}
+break;
+case 8:
+{
+cout<<"\nThank You\n"<<endl;
+p=-1;
+}
+break;
+}
+}
+
+
+return 0;
+}
